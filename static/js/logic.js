@@ -99,7 +99,7 @@ function createMap(earthquakes) {
         var div = L.DomUtil.create("div", "legend");
         var depth = [1, 11, 31, 51, 71, 91];
         var labels = ["0-10", "10-30", "30-50", "50-70", "70-90", "90+"];
-        div.innerHTML = '<div>Depth of Earthquake in Km</div>';
+        div.innerHTML = '<div>Depth (Km)</div>';
             for (var i = 0; i < depth.length; i++){
             div.innerHTML += '<i style="background:' + markerColor(depth[i]) + '">&nbsp;&nbsp;&nbsp;&nbsp;</i>&nbsp;'+ labels[i] + '<br>';
         }
