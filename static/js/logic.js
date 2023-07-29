@@ -9,7 +9,7 @@ d3.json(queryUrl).then(function (data) {
 
 // Create a function to set marker size based on magnitude
 function markerSize(magnitude) {
-    return magnitude;
+    return magnitude * 20000;
 }
 
 // Create a function to set marker color based on depth
@@ -43,9 +43,10 @@ var earthquakes = L.geoJSON(earthquakeData, {
     pointToLayer: function(feature, latlng) {
         // Define markers with size based on magnitude and color based on depth 
         var markers = {
-            stroke: false,
+            stroke: true,
             fillOpacity: 0.75,
             color: "black",
+            weight: 0.25,
             fillColor: markerColor(feature.geometry.coordinates[2]),
             radius: markerSize(feature.properties.mag)
         }    
@@ -68,8 +69,7 @@ function createMap(earthquakes) {
   
     // Create a baseMaps object.
     var baseMaps = {
-      "Street Map": street,
-      "Topographic Map": topo
+      "Street Map": street
     };
   
     // Create an overlay object to hold our overlay.
@@ -79,8 +79,8 @@ function createMap(earthquakes) {
   
     // Create our map, giving it the streetmap and earthquakes layers to display on load.
     var myMap = L.map("map", {
-      center: [37.09, -95.71],
-      zoom: 5,
+      center: [40, -100],
+      zoom: 4,
       layers: [street, earthquakes]
     });
 
