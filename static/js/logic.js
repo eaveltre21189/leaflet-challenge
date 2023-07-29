@@ -84,15 +84,30 @@ function createMap(earthquakes) {
       layers: [street, earthquakes]
     });
 
-    // Add the legend to the map
-    legend.addTo(map);
-  
-    // Create a layer control.
+// Create a layer control.
     // Pass it our baseMaps and overlayMaps.
     // Add the layer control to the map.
-    L.control.layers(baseMaps, overlayMaps, {
-      collapsed: false
-    }).addTo(myMap);
+    // L.control.layers(baseMaps, overlayMaps, {
+    //   collapsed: false
+    // }).addTo(myMap);
+
+    // Creates the map legend
+    let legend = L.control({position: "bottomright"});
+
+    // Depth values represent a value from each of the six possible data ranges so the loop captures each possible color value.
+    legend.onAdd = function() {
+        var div = L.DomUtil.create("div", "legend");
+        var depth = [1, 11, 31, 51, 71, 91];
+        var labels = ["0-10", "10-30", "30-50", "50-70", "70-90", "90+"];
+        div.innerHTML = '<div>Depth of Earthquake in Km</div>';
+            for (var i = 0; i < depth.length; i++){
+            div.innerHTML += '<i style="background:' + markerColor(depth[i]) + '">&nbsp;&nbsp;&nbsp;&nbsp;</i>&nbsp;'+ labels[i] + '<br>';
+        }
+        return div;
+    };
+    
+    // Add legend to map
+    legend.addTo(myMap);
   
-  }
+};
   
